@@ -8,7 +8,7 @@ import checkPropTypes from 'check-prop-types';
  */
 export const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
-}
+};
 
 /**
  * Throw error if conformingProps do not pass propTypes validation.
@@ -20,6 +20,7 @@ export const checkProps = (component, conformingProps) => {
     component.propTypes,
     conformingProps,
     'prop',
-    component.name);
+    component.name
+  );
   expect(propError).toBeUndefined();
-}
+};
