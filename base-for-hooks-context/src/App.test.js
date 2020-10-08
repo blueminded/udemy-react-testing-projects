@@ -23,4 +23,11 @@ describe('getSecretWord calls', () => {
     setup();
     expect(mockGetSecretWord).toHaveBeenCalled();
   });
+
+  test('should not update on App update', () => {
+    const wrapper = setup();
+    mockGetSecretWord.mockClear();
+    wrapper.setProps();
+    expect(mockGetSecretWord).not.toHaveBeenCalled();
+  });
 });
