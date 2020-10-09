@@ -12,7 +12,7 @@ const Input = ({ secretWord }) => {
         <input
           type="text"
           data-test="input-box"
-          className="mb-2mx-sm-3"
+          className="mb-2 mx-sm-3"
           placeholder={stringsModule.getStringByLanguage(
             language,
             'guessInputPlaceHolder'
