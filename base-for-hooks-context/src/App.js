@@ -2,9 +2,15 @@ import React from 'react';
 import hookActions from './actions/hookActions';
 import './App.css';
 import Input from './components/Input';
+import LanguagePicker from './components/LanguagePicker';
+import languageContext from './contexts/languageContext';
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'setSecretWord':
+      return { ...state, secretWord: action.payload };
+      break;
+    case 'setLanguage':
       return { ...state, secretWord: action.payload };
       break;
 
@@ -15,10 +21,14 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  const [state, dispatch] = React.useReducer(reducer, { secretWord: null });
+  const [state, dispatch] = React.useReducer(reducer, {
+    secretWord: null,
+    language: 'en',
+  });
 
   const setSecretWord = secretWord =>
     dispatch({ type: 'setSecretWord', payload: secretWord });
+  const setLanguage = lang => dispatch({ type: 'setLanguage', payload: lang });
 
   React.useEffect(() => {
     hookActions.getSecretWord(setSecretWord);
@@ -34,7 +44,11 @@ function App() {
 
   return (
     <div className="container" data-test="component-app">
-      <Input secretWord={state.secretWord}></Input>
+      <h1>Jotto</h1>
+      <languageContext.Provider value={state.language}>
+        <LanguagePicker setLanguage={setLanguage}></LanguagePicker>
+        <Input secretWord={state.secretWord}></Input>
+      </languageContext.Provider>
     </div>
   );
 }
